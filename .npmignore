@@ -1,0 +1,12 @@
+node_modules/
+
+*.ts
+!*.d.ts
+
+/.npmrc
+/.gitignore
+/.npmignore
+/.vscodeignore
+/desktop.ini
+/rom.svg
+/rom.ico

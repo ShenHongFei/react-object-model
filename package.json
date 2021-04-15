@@ -1,0 +1,40 @@
+{
+    "name": "react-object-model",
+    "description": "Object-oriented state management for react.",
+    "keywords": [
+        "react",
+        "state management",
+        "object-oriented"
+    ],
+    "version": "0.0.1",
+    "type": "commonjs",
+    "main": "./index.js",
+    "scripts": {
+        "start": "tsc --watch",
+        "typecheck": "tsc --noEmit",
+        "build": "tsc"
+    },
+    "author": {
+        "name": "ShenHongFei",
+        "email": "shf19961008@gmail.com",
+        "url": "https://github.com/ShenHongFei"
+    },
+    "publisher": "ShenHongFei",
+    "license": "MIT",
+    "homepage": "https://github.com/ShenHongFei/react-object-model",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ShenHongFei/react-object-model"
+    },
+    "bugs": {
+        "url": "https://github.com/ShenHongFei/react-object-model/issues"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.3",
+        "react": "^17.0.2",
+        "typescript": "^4.2.3"
+    },
+    "dependencies": {
+        "tslib": "^2.2.0"
+    }
+}
