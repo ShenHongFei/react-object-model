@@ -50,6 +50,8 @@ let counter = new Counter()
 ReactDOM.render(<Example/>, document.querySelector('.root'))
 ```
 
+[![Edit vigilant-northcutt-8p0q4](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-northcutt-8p0q4?fontsize=14&hidenavigation=1&theme=light)
+
 
 ## Implementation
 ```ts
