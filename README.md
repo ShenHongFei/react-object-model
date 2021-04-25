@@ -2,6 +2,10 @@
 Object-oriented state management for react
 
 
+## GitHub
+[https://github.com/ShenHongFei/react-object-model](https://github.com/ShenHongFei/react-object-model)
+
+
 ## Usage
 ```tsx
 import React from 'react'

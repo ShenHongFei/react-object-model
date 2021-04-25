@@ -1,7 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 
+
+/** Object-oriented state management for react.  
+    @see https://github.com/ShenHongFei/react-object-model
+    @example
+    ```ts
+    class User extends Model <User> {
+        name = 'Tom'
+        age = 16
+    }
+    ```
+*/
 export class Model <T> {
-    protected _selectors: Map<React.MutableRefObject<(keyof T)[]>, ({ }) => void>
+    protected _selectors: Map<React.MutableRefObject<(keyof T)[] | undefined>, ({ }) => void>
     
     protected _state: any
     
@@ -21,6 +32,14 @@ export class Model <T> {
         })
     }
     
+    /** use and watch model's properties like react hooks
+        @param selector array of properties to watch
+        @returns model self
+        @example
+        ```ts
+        const { name, age } = user.use(['name', 'age'])
+        ```
+    */
     use (selector?: (keyof T)[]) {
         const ref = useRef(selector)
         this._selectors.set(ref, useState({ })[1])
@@ -30,6 +49,13 @@ export class Model <T> {
         return this as any as T
     }
     
+    /** assign properties to model then diff then rerender (when changed)
+        @param data properties
+        @example
+        ```ts
+        user.set({ name: 'Tom', age: 16 })
+        ```
+    */
     set (data: Partial<T>) {
         Object.assign(this, data)
         this.render()
