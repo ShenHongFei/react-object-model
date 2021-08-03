@@ -1,5 +1,5 @@
 # react-object-model
-[![npm version](https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen)](https://www.npmjs.com/package/react-object-model) [![npm downloads](https://img.shields.io/npm/dm/react-object-model?style=flat-square&color=brightgreen)](https://www.npmjs.com/package/react-object-model)
+[![npm version](https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen)](https://www.npmjs.com/package/react-object-model) [![npm downloads](https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen)](https://www.npmjs.com/package/react-object-model)
 
 Object-oriented state management for react
 ![rom.png](./rom.png)
