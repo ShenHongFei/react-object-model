@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
+import type React from 'react'
 
 import { createForm, formSubscriptionItems, fieldSubscriptionItems } from 'final-form'
 import type { FormState, FieldState, FormApi, FormSubscription, FieldSubscription, SubmissionErrors, ValidationErrors } from 'final-form'
@@ -17,8 +18,10 @@ import type { FormState, FieldState, FormApi, FormSubscription, FieldSubscriptio
     ```
 */
 export class Model <T> {
-    protected _selectors: Map<React.MutableRefObject<(keyof T)[] | undefined>, ({ }) => void>
+    /** Map<rerender, selector> */
+    protected _selectors: Map<() => void, (keyof T)[] | undefined>
     
+    /** last state */
     protected _state: any
     
     constructor () {
@@ -26,7 +29,7 @@ export class Model <T> {
             configurable: true,
             enumerable: false,
             writable: true,
-            value: new Map<React.MutableRefObject<(keyof T)[]>, ({ }) => void>()
+            value: new Map<() => void, (keyof T)[] | undefined>()
         })
         
         Object.defineProperty(this, '_state', {
@@ -46,10 +49,11 @@ export class Model <T> {
         ```
     */
     use (selector?: (keyof T)[]) {
-        const ref = useRef(selector)
-        this._selectors.set(ref, useState({ })[1])
+        // React guarantees that dispatch function identity is stable and won’t change on re-renders
+        const [, rerender] = useReducer(s => s + 1, 0)
+        this._selectors.set(rerender, selector)
         useEffect(() => {
-            return () => { this._selectors.delete(ref) }
+            return () => { this._selectors.delete(rerender) }
         }, [ ])
         return this as any as T
     }
@@ -67,15 +71,23 @@ export class Model <T> {
     }
     
     render () {
-        this._selectors.forEach( (setState, { current: selector }) => {
-            if (selector && !selector.find( (key: keyof T) => this[key as any] !== this._state[key] ))
-                return
-            setState({ })
+        this._selectors.forEach((selector, rerender) => {
+            if (selector && !selector.find( key => this[key as any] !== this._state[key] )) return
+            rerender()
         })
         this._state = { ...this }
     }
 }
 
+
+// polyfill
+if (!Object.fromEntries)
+    Object.fromEntries = function fromEntries (iterable: any[]) {
+        return [...iterable].reduce((acc, [key, val]) => {
+            acc[key] = val
+            return acc
+        }, { })
+    }
 
 
 /** Object-oriented form model based on final-form.  

@@ -6,7 +6,7 @@
         "state management",
         "object-oriented"
     ],
-    "version": "0.0.3",
+    "version": "0.0.5",
     "type": "commonjs",
     "main": "./index.js",
     "scripts": {
@@ -30,9 +30,9 @@
         "url": "https://github.com/ShenHongFei/react-object-model/issues"
     },
     "devDependencies": {
-        "@types/react": "^17.0.11",
+        "@types/react": "^17.0.15",
         "react": "^17.0.2",
-        "typescript": "^4.3.4"
+        "typescript": "^4.3.5"
     },
     "dependencies": {
         "final-form": "^4.20.2",
