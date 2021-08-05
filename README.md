@@ -5,7 +5,7 @@
 </p>
 
 <h2 align='center'>
-    <span>react-object-model</span>
+    react-object-model
 </h2>
 
 <p align='center'>
