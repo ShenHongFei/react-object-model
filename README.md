@@ -1,7 +1,7 @@
 # react-object-model
 
 <p align='center'>
-    <img src='./rom.png' alt='react-object-model' width='64' style='display: block'>
+    <img src='./rom.png' alt='react-object-model' width='64'>
 </p>
 
 <h2 align='center'>
