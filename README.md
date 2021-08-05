@@ -1,14 +1,30 @@
 # react-object-model
-[![npm version](https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen)](https://www.npmjs.com/package/react-object-model) [![npm downloads](https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen)](https://www.npmjs.com/package/react-object-model)
+
+<p align='center'>
+    <img src='./rom.png' alt='react-object-model' width='64' style='display: block'>
+    <span style='font-size: 28px; font-weight: bold; display: block; margin-bottom: 10px'>react-object-model</span>
+    <a href='https://www.npmjs.com/package/react-object-model' alt='npm version'>
+        <img src='https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen' />
+    </a>
+    <a href='https://www.npmjs.com/package/react-object-model' alt='npm downloads'>
+        <img src='https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen' />
+    </a>
+    
+</p>
+
 
 Object-oriented state management for react
-![rom.png](./rom.png)
+
+- Lightweight, based merely on React hooks: `useState` and `useEffect`
+- Simple and intuitive API: `const { name, age } = user.use(['name', 'age'])`
+- Subscription based, diff subscribed properties, no unnecessary rerender of components
+
 
 ## GitHub
 [https://github.com/ShenHongFei/react-object-model](https://github.com/ShenHongFei/react-object-model)
 
 
-## Model
+## 1. Model
 ### Usage
 ```tsx
 import React from 'react'
@@ -88,7 +104,7 @@ export class Model <T> {
     }
     
     use (selector?: (keyof T)[]) {
-        // React guarantees that dispatch function identity is stable and won’t change on re-renders
+        // React guarantees that setState function identity is stable and won’t change on re-renders
         const [, rerender] = useReducer(s => s + 1, 0)
         this._selectors.set(rerender, selector)
         useEffect(() => {
@@ -116,7 +132,7 @@ export default Model
 
 <hr/>
 
-## FormModel
+## 2. FormModel
 ### Usage
 ```tsx
 import React from 'react'

@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type React from 'react'
 
 import { createForm, formSubscriptionItems, fieldSubscriptionItems } from 'final-form'
@@ -19,7 +19,7 @@ import type { FormState, FieldState, FormApi, FormSubscription, FieldSubscriptio
 */
 export class Model <T> {
     /** Map<rerender, selector> */
-    protected _selectors: Map<() => void, (keyof T)[] | undefined>
+    protected _selectors: Map<({ }) => void, (keyof T)[]>
     
     /** last state */
     protected _state: any
@@ -29,7 +29,7 @@ export class Model <T> {
             configurable: true,
             enumerable: false,
             writable: true,
-            value: new Map<() => void, (keyof T)[] | undefined>()
+            value: new Map()
         })
         
         Object.defineProperty(this, '_state', {
@@ -50,7 +50,7 @@ export class Model <T> {
     */
     use (selector?: (keyof T)[]) {
         // React guarantees that dispatch function identity is stable and won’t change on re-renders
-        const [, rerender] = useReducer(s => s + 1, 0)
+        const [, rerender] = useState({ })
         this._selectors.set(rerender, selector)
         useEffect(() => {
             return () => { this._selectors.delete(rerender) }
@@ -73,7 +73,7 @@ export class Model <T> {
     render () {
         this._selectors.forEach((selector, rerender) => {
             if (selector && !selector.find( key => this[key as any] !== this._state[key] )) return
-            rerender()
+            rerender({ })
         })
         this._state = { ...this }
     }
