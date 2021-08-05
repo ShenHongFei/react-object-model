@@ -2,14 +2,19 @@
 
 <p align='center'>
     <img src='./rom.png' alt='react-object-model' width='64' style='display: block'>
-    <span style='font-size: 28px; font-weight: bold; display: block; margin-bottom: 10px'>react-object-model</span>
+</p>
+
+<h2 align='center'>
+    <span>react-object-model</span>
+</h2>
+
+<p align='center'>
     <a href='https://www.npmjs.com/package/react-object-model' alt='npm version'>
         <img src='https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen' />
     </a>
     <a href='https://www.npmjs.com/package/react-object-model' alt='npm downloads'>
         <img src='https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen' />
     </a>
-    
 </p>
 
 
