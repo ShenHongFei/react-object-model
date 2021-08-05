@@ -9,10 +9,10 @@
 </h2>
 
 <p align='center'>
-    <a href='https://www.npmjs.com/package/react-object-model' alt='npm version'>
+    <a href='https://www.npmjs.com/package/react-object-model' alt='npm version' target='_blank'>
         <img src='https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen' />
     </a>
-    <a href='https://www.npmjs.com/package/react-object-model' alt='npm downloads'>
+    <a href='https://www.npmjs.com/package/react-object-model' alt='npm downloads' target='_blank'>
         <img src='https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen' />
     </a>
 </p>
