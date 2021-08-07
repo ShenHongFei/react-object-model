@@ -9,11 +9,11 @@
 </h2>
 
 <p align='center'>
-    <a href='https://www.npmjs.com/package/react-object-model' alt='npm version' target='_blank'>
-        <img src='https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen' />
+    <a href='https://www.npmjs.com/package/react-object-model' target='_blank'>
+        <img alt='npm version' src='https://img.shields.io/npm/v/react-object-model.svg?style=flat-square&color=brightgreen' />
     </a>
-    <a href='https://www.npmjs.com/package/react-object-model' alt='npm downloads' target='_blank'>
-        <img src='https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen' />
+    <a href='https://www.npmjs.com/package/react-object-model' target='_blank'>
+        <img alt='npm downloads' src='https://img.shields.io/npm/dt/react-object-model?style=flat-square&color=brightgreen' />
     </a>
 </p>
 
@@ -126,7 +126,7 @@ export class Model <T> {
     render () {
         this._selectors.forEach((selector, rerender) => {
             if (selector && !selector.find( key => this[key as any] !== this._state[key] )) return
-            rerender()
+            rerender({ })
         })
         this._state = { ...this }
     }
