@@ -11,3 +11,4 @@ node_modules/
 /rom.svg
 /rom.ico
 /tsconfig.json
+/package-lock.json
