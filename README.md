@@ -31,30 +31,91 @@ Object-oriented state management for react
 
 ## 1. Model
 ### Usage
+
+[![Edit vigilant-northcutt-8p0q4](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-northcutt-8p0q4?fontsize=14&hidenavigation=1&theme=light)
+
 ```tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 import Model from 'react-object-model'
 
+
 function Example () {
+    const { name } = user.use(['name'])
+    
     const { value } = counter.use(['value'])
     
-    return <div>
-        <div>counter.value = {value}</div>
-        <div>
-            <button onClick={ () => { counter.increase() } }>+1</button>
-            
-            <button onClick={ async () => {
-                await counter.increase_async()
-                console.log('counter.value', counter.value)
-            } }>+1 (delay 2s)</button>
-            
-            <button onClick={ () => { counter.reset() } }>reset</button>
+    
+    return <div className='example'>
+        <div className='user'>
+            <h3>User:</h3>
+            <div>
+                <button onClick={() => {
+                    // set model properties by `model.set` method
+                    // (`user.name = 'Tom'` is not allowed)
+                    user.set({ name: 'Tom', age: 16 })
+                }}>login</button>
+                
+                <button onClick={() => {
+                    // will not trigger rerender as we don't subscribe to user's age in this component
+                    // (except for the first `user.set` call as the model doesn't know the previous state)
+                    user.set({ age: Math.trunc(100 * Math.random()) })
+                }}>set age</button>
+                
+                <button onClick={() => {
+                    // but we could get current value of model's property without subscription
+                    alert(user.age)
+                    console.log('user.age = ', user.age)
+                }}>get age</button>
+                
+                <button onClick={async () => {
+                    // call model method to change it's state
+                    await user.logout()
+                    alert('user logged out')
+                    console.log('user logged out')
+                }}>logout (delay 2s)</button>
+            </div>
+            <div className='display'>user.name = {name}</div>
+        </div>
+        
+        <div className='example-counter'>
+            <h3>Counter:</h3>
+            <div>
+                <button onClick={() => { counter.increase() }}>+1</button>
+                
+                <button onClick={ async () => {
+                    await counter.increase_async()
+                    console.log('counter.value', counter.value)
+                } }>+1 (delay 2s)</button>
+                
+                <button onClick={() => { counter.reset() }}>reset</button>
+            </div>
+            <div className='display'>counter.value = {value}</div>
+        </div>
+        
+        <div className='stats'>
+            <h3>Statistics:</h3>
+            <div className='detail'>
+                <div>{'<'}Example{' />'} component rendered</div>
+                <RenderCounter />
+                <div>times</div>
+            </div>
         </div>
     </div>
 }
 
+class User extends Model <User> {
+    name = ''
+    age = 0
+    
+    async logout () {
+        await delay(2000)
+        this.set({ name: '', age: 0 })
+    }
+}
+
+let user = new User()
 
 class Counter extends Model <Counter> {
     value = 0
@@ -68,26 +129,27 @@ class Counter extends Model <Counter> {
     }
     
     async increase_async () {
-        await new Promise(resolve => { setTimeout(resolve, 2000) })
+        await delay(2000)
         this.set({ value: this.value + 1 })
     }
 }
 
 let counter = new Counter()
 
-ReactDOM.render(<Example/>, document.querySelector('.root'))
+async function delay (milliseconds: number) {
+    return new Promise( resolve => {
+        setTimeout(resolve, milliseconds)
+    })
+}
+
+ReactDOM.render(<Example />, document.querySelector('.root'))
 ```
-
-[![Edit vigilant-northcutt-8p0q4](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-northcutt-8p0q4?fontsize=14&hidenavigation=1&theme=light)
-
 
 ### Implementation
 ```ts
-import { useEffect, useRef, useState } from 'react'
-
 export class Model <T> {
     /** Map<rerender, selector> */
-    protected _selectors: Map<() => void, (keyof T)[] | undefined>
+    protected _selectors: Map<({ }) => void, (keyof T)[]>
     
     /** last state */
     protected _state: any
@@ -97,7 +159,7 @@ export class Model <T> {
             configurable: true,
             enumerable: false,
             writable: true,
-            value: new Map<() => void, (keyof T)[] | undefined>()
+            value: new Map()
         })
         
         Object.defineProperty(this, '_state', {
@@ -109,8 +171,8 @@ export class Model <T> {
     }
     
     use (selector?: (keyof T)[]) {
-        // React guarantees that setState function identity is stable and won’t change on re-renders
-        const [, rerender] = useReducer(s => s + 1, 0)
+        // React guarantees that dispatch function identity is stable and won’t change on re-renders
+        const [, rerender] = useState({ })
         this._selectors.set(rerender, selector)
         useEffect(() => {
             return () => { this._selectors.delete(rerender) }
@@ -131,8 +193,6 @@ export class Model <T> {
         this._state = { ...this }
     }
 }
-
-export default Model
 ```
 
 <hr/>
