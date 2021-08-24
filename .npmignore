@@ -3,6 +3,7 @@ node_modules/
 *.ts
 !*.d.ts
 
+/example
 /.npmrc
 /.gitignore
 /.npmignore
