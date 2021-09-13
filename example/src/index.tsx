@@ -25,7 +25,7 @@ function Example () {
                 }}>login</button>
                 
                 <button onClick={() => {
-                    // will not trigger rerender as we don't use subscribe to user's age in this component
+                    // will not trigger rerender as we don't use (subscribe to) user's age in this component
                     // (except for the first `user.set` call as the model doesn't know the previous state)
                     user.set({ age: Math.trunc(100 * Math.random()) })
                 }}>set age</button>

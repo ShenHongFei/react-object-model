@@ -9,7 +9,7 @@
         "isolatedModules": true,
         
         // --- Build
-        "target": "ES5",
+        "target": "ES2019",
         "allowJs": false,
         "checkJs": false,
         "pretty": true,
@@ -17,8 +17,8 @@
         "lib": ["ESNext", "DOM"],
         "importHelpers": true,
         // "watch": false
-        // "incremental": true,
-        // "tsBuildInfoFile": "./build/.tsbuildinfo",
+        "incremental": true,
+        "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
         
         
         // --- Emit
@@ -52,6 +52,17 @@
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "skipLibCheck": true,
+    },
+    
+    "watchOptions": {
+        "excludeDirectories": [
+            "**/node_modules",
+        ],
+        
+        "watchFile": "useFsEvents",
+        "watchDirectory": "useFsEvents",
+        
+        "fallbackPolling": "dynamicPriority"
     }
 }
 
