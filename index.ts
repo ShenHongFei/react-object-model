@@ -80,16 +80,6 @@ export class Model <T> {
 }
 
 
-// polyfill
-if (!Object.fromEntries)
-    Object.fromEntries = function fromEntries (iterable: any[]) {
-        return [...iterable].reduce((acc, [key, val]) => {
-            acc[key] = val
-            return acc
-        }, { })
-    }
-
-
 /** Object-oriented form model based on final-form.  
     Designed to work seamlessly with Form component of @tencent/tea-componet.  
     @see https://github.com/ShenHongFei/react-object-model

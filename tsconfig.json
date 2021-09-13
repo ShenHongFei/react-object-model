@@ -1,4 +1,8 @@
 {
+    "exclude": [
+        "./example/"
+    ],
+    
     "compilerOptions": {
         // --- Module
         "module": "CommonJS", // none, CommonJS, amd, system, umd, es6, es2015, ESNext
