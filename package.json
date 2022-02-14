@@ -1,12 +1,7 @@
 {
     "name": "react-object-model",
     "description": "Object-oriented state management for react.",
-    "keywords": [
-        "react",
-        "state management",
-        "object-oriented"
-    ],
-    "version": "0.0.9",
+    "version": "0.0.10",
     "type": "commonjs",
     "main": "./index.js",
     "scripts": {
@@ -29,13 +24,18 @@
     "bugs": {
         "url": "https://github.com/ShenHongFei/react-object-model/issues"
     },
+    "keywords": [
+        "react",
+        "state management",
+        "object-oriented"
+    ],
     "devDependencies": {
-        "@types/react": "^17.0.27",
+        "@types/react": "^17.0.39",
         "react": "^17.0.2",
-        "typescript": "^4.4.3"
+        "typescript": "^4.5.5"
     },
     "dependencies": {
-        "final-form": "^4.20.4",
+        "final-form": "^4.20.6",
         "tslib": "^2.3.1"
     }
 }

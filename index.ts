@@ -70,14 +70,41 @@ export class Model <T> {
         this.render()
     }
     
-    render () {
-        this._selectors.forEach((selector, rerender) => {
-            if (selector && !selector.find( key => this[key as any] !== this._state[key] )) return
-            rerender({ })
-        })
+    render (diffs?: (keyof T)[]) {
+        for (const [rerender, selector] of this._selectors) {
+            let has_diff = false
+            
+            if (selector)
+                if (diffs)
+                    for (let i = 0;  i < selector.length;  i++) {
+                        const key = selector[i]
+                        for (let j = 0;  j < diffs.length;  j++)
+                            if (diffs[j] === key) {
+                                has_diff = true
+                                break
+                            }
+                        if (has_diff)
+                            break
+                    }
+                else
+                    for (let i = 0;  i < selector.length;  i++) {
+                        const key = selector[i]
+                        if (this[key as any] !== this._state[key]) {
+                            has_diff = true
+                            break
+                        }
+                    }
+            else
+                has_diff = true
+            
+            if (has_diff)
+                rerender({ })
+        }
+        
         this._state = { ...this }
     }
 }
+
 
 
 /** Object-oriented form model based on final-form.  
