@@ -1,7 +1,7 @@
 {
     "name": "react-object-model",
     "description": "Object-oriented state management for react.",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "type": "commonjs",
     "main": "./index.js",
     "scripts": {

@@ -71,35 +71,19 @@ export class Model <T> {
     }
     
     render (diffs?: (keyof T)[]) {
-        for (const [rerender, selector] of this._selectors) {
-            let has_diff = false
-            
-            if (selector)
-                if (diffs)
-                    for (let i = 0;  i < selector.length;  i++) {
-                        const key = selector[i]
-                        for (let j = 0;  j < diffs.length;  j++)
-                            if (diffs[j] === key) {
-                                has_diff = true
-                                break
-                            }
-                        if (has_diff)
-                            break
-                    }
-                else
-                    for (let i = 0;  i < selector.length;  i++) {
-                        const key = selector[i]
-                        if (this[key as any] !== this._state[key]) {
-                            has_diff = true
-                            break
-                        }
-                    }
-            else
-                has_diff = true
-            
-            if (has_diff)
+        const set_diffs = diffs ? new Set(diffs) : null
+        
+        for (const [rerender, selector] of this._selectors)
+            if (
+                !selector || 
+                selector.find(key => 
+                    set_diffs ?
+                        set_diffs.has(key)
+                    :
+                        this[key as any] !== this._state[key]
+                )
+            )
                 rerender({ })
-        }
         
         this._state = { ...this }
     }
