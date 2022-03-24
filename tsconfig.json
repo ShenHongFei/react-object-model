@@ -5,7 +5,7 @@
     
     "compilerOptions": {
         // --- module
-        "module": "CommonJS", // none, CommonJS, amd, system, umd, es6, es2015, ESNext
+        "module": "ESNext", // none, CommonJS, amd, system, umd, es6, es2015, ESNext
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
@@ -13,7 +13,7 @@
         "isolatedModules": true,
         
         // --- build
-        "target": "ES2019",
+        "target": "ESNext",
         "allowJs": false,
         "checkJs": false,
         "pretty": true,

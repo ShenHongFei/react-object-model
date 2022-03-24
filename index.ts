@@ -1,8 +1,28 @@
-import { useEffect, useState } from 'react'
-import type React from 'react'
+import {
+    type default as React,
+    useEffect,
+    useState
+} from 'react'
 
-import { createForm, formSubscriptionItems, fieldSubscriptionItems } from 'final-form'
-import type { FormState, FieldState, FormApi, FormSubscription, FieldSubscription, SubmissionErrors, ValidationErrors } from 'final-form'
+import {
+    createForm,
+    formSubscriptionItems,
+    fieldSubscriptionItems,
+    type FormState,
+    type FieldState,
+    type FormApi,
+    type FormSubscription,
+    type FieldSubscription,
+    type SubmissionErrors,
+    type ValidationErrors
+} from 'final-form'
+
+
+declare global {
+    interface Window {
+        model: Model<any>
+    }
+}
 
 
 /** Object-oriented state management for react.  
