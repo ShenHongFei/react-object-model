@@ -2,7 +2,7 @@
     "name": "react-object-model",
     "description": "Object-oriented state management for react.",
     "version": "0.0.12",
-    "type": "commonjs",
+    "type": "module",
     "main": "./index.js",
     "scripts": {
         "start": "tsc --watch",
