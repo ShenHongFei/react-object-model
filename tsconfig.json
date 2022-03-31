@@ -19,7 +19,7 @@
         "pretty": true,
         "newLine": "lf",
         "lib": ["ESNext", "DOM"],
-        "importHelpers": true,
+        "importHelpers": false,
         // "watch": false
         "incremental": true,
         "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
