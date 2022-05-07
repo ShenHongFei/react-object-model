@@ -2,7 +2,7 @@
 import './index.sass'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot as create_root } from 'react-dom/client'
 
 import { Model } from 'react-object-model'
 
@@ -110,4 +110,8 @@ async function delay (milliseconds: number) {
     })
 }
 
-ReactDOM.render(<Example />, document.querySelector('.root'))
+create_root(
+    document.querySelector('.root')
+).render(
+    <Example />
+)
