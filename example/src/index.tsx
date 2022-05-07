@@ -4,7 +4,7 @@ import './index.sass'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Model from 'react-object-model'
+import { Model } from 'react-object-model'
 
 import RenderCounter from './counter'
 
@@ -73,7 +73,7 @@ function Example () {
 }
 
 
-class User extends Model <User> {
+class User extends Model<User> {
     name = ''
     age = 0
     
@@ -85,7 +85,7 @@ class User extends Model <User> {
 
 let user = new User()
 
-class Counter extends Model <Counter> {
+class Counter extends Model<Counter> {
     value = 0
     
     reset () {

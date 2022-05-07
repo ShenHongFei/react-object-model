@@ -38,7 +38,7 @@ Object-oriented state management for react
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Model from 'react-object-model'
+import { Model } from 'react-object-model'
 
 
 function Example () {
