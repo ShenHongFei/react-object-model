@@ -154,11 +154,17 @@ export class FormModel <FormValues> {
     use (subscription: FormSubscription = FormModel.subscription_form_all) {
         const { form } = this
         
-        const [state, set_state] = useState(() => form.getState())
+        const [state, set_state] = useState(() => 
+            form.getState()
+        )
         
         Object.assign(form, state)
         
-        useEffect(() => form.subscribe(set_state, subscription), [ ])
+        useEffect(
+            () => 
+                form.subscribe(set_state, subscription),
+            [ ]
+        )
         
         return this
     }
