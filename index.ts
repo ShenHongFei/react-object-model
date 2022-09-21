@@ -1,8 +1,4 @@
-import {
-    type default as React,
-    useEffect,
-    useState
-} from 'react'
+import { type default as React, useEffect, useState } from 'react'
 
 import {
     createForm,
@@ -37,9 +33,9 @@ declare global {
     let user = new User()
     ```
 */
-export class Model <T> {
+export class Model <TModel> {
     /** Map<rerender, selector> */
-    protected _selectors: Map<({ }) => void, (keyof T)[]>
+    protected _selectors: Map<({ }) => void, (keyof TModel)[]>
     
     /** last state */
     protected _state: any
@@ -68,14 +64,14 @@ export class Model <T> {
         const { name, age } = user.use(['name', 'age'])
         ```
     */
-    use (selector?: (keyof T)[]) {
+    use (selector?: (keyof TModel)[]) {
         // React guarantees that dispatch function identity is stable and won’t change on re-renders
         const [, rerender] = useState({ })
         this._selectors.set(rerender, selector)
         useEffect(() => {
             return () => { this._selectors.delete(rerender) }
         }, [ ])
-        return this as any as T
+        return this as any as TModel
     }
     
     /** assign properties to model then diff then rerender (when changed)
@@ -85,12 +81,12 @@ export class Model <T> {
         user.set({ name: 'Tom', age: 16 })
         ```
     */
-    set (data: Partial<T>) {
+    set (data: Partial<TModel>) {
         Object.assign(this, data)
         this.render()
     }
     
-    render (diffs?: (keyof T)[]) {
+    render (diffs?: (keyof TModel)[]) {
         const set_diffs = diffs ? new Set(diffs) : null
         
         for (const [rerender, selector] of this._selectors)
@@ -288,4 +284,3 @@ type NonFunctionPropertyNames<T> = {
 }[keyof T]
 
 type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>
-
