@@ -8,14 +8,15 @@
     ],
     "main": "src/index.js",
     "dependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-object-model": "^1.0.0",
-        "react-scripts": "^5.0.1"
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-object-model": "1.0.0",
+        "react-scripts": "5.0.1"
     },
     "devDependencies": {
-        "@babel/runtime": "7.13.8",
-        "typescript": "^4.9.4"
+        "@types/react": "18.0.25",
+        "@types/react-dom": "18.0.9",
+        "typescript": "4.9.4"
     },
     "scripts": {
         "start": "react-scripts start",
