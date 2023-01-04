@@ -36,7 +36,7 @@ Object-oriented state management for react
 
 ```tsx
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
 import { Model } from 'react-object-model'
 
@@ -84,10 +84,10 @@ function Example () {
             <div>
                 <button onClick={() => { counter.increase() }}>+1</button>
                 
-                <button onClick={ async () => {
+                <button onClick={async () => {
                     await counter.increase_async()
                     console.log('counter.value', counter.value)
-                } }>+1 (delay 2s)</button>
+                }}>+1 (delay 2s)</button>
                 
                 <button onClick={() => { counter.reset() }}>reset</button>
             </div>
@@ -142,17 +142,22 @@ async function delay (milliseconds: number) {
     })
 }
 
-ReactDOM.render(<Example />, document.querySelector('.root'))
+createRoot(
+    document.querySelector('.root')
+).render(
+    <Example />
+)
 ```
 
 ### Implementation
 ```ts
-export class Model <T> {
+export class Model <TModel> {
     /** Map<rerender, selector> */
-    protected _selectors: Map<({ }) => void, (keyof T)[]>
+    protected _selectors: Map<({ }) => void, (keyof TModel)[]>
     
-    /** last state */
+    /** 保存上次渲染的状态用于比较  last state */
     protected _state: any
+    
     
     constructor () {
         Object.defineProperty(this, '_selectors', {
@@ -170,26 +175,53 @@ export class Model <T> {
         })
     }
     
-    use (selector?: (keyof T)[]) {
+    
+    /** 像使用 react hooks 那样订阅模型属性  use and watch model's properties like react hooks  
+        use 之后，通过 set 更新属性才会触发组件重新渲染  After `use`, properties updated by `set` will trigger rerender
+        @param selector 订阅属性名称组成的数组  selector array of properties to watch
+        @returns 模型本身  model self
+        @example ```ts
+            const { name, age } = user.use(['name', 'age'])
+            ``` */
+    use <Key extends keyof TModel> (selector?: Key[]) {
         // React guarantees that dispatch function identity is stable and won’t change on re-renders
         const [, rerender] = useState({ })
-        this._selectors.set(rerender, selector)
+        
         useEffect(() => {
+            this._selectors.set(rerender, selector)
             return () => { this._selectors.delete(rerender) }
         }, [ ])
-        return this as any as T
+        
+        return this as any as Pick<TModel, Key>
     }
     
-    set (data: Partial<T>) {
+    
+    /** 更新模型属性，diff, 重新渲染对应组件  assign properties to model then diff then rerender (when changed)
+        @param data 属性  data properties
+        @example ```ts
+            user.set({ name: 'Tom', age: 16 })
+            ``` */
+    set (data: Partial<TModel>) {
         Object.assign(this, data)
         this.render()
     }
     
-    render () {
-        this._selectors.forEach((selector, rerender) => {
-            if (selector && !selector.find( key => this[key as any] !== this._state[key] )) return
-            rerender({ })
-        })
+    
+    render (diffs?: (keyof TModel)[]) {
+        const set_diffs = diffs ? new Set(diffs) : null
+        
+        for (const [rerender, selector] of this._selectors)
+            if (
+                !selector || 
+                selector.find(key => 
+                    set_diffs ?
+                        set_diffs.has(key)
+                    :
+                        this[key as any] !== this._state[key]
+                )
+            )
+                rerender({ })
+        
         this._state = { ...this }
     }
 }
@@ -197,13 +229,15 @@ export class Model <T> {
 
 <hr/>
 
+
+
 ## 2. FormModel
 ### Usage
 ```tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { FormModel, FormField } from 'react-object-model'
+import { FormModel, FormField } from 'react-object-model/form.js'
 
 
 class UserForm extends FormModel <UserFormValues> {
