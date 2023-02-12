@@ -22,7 +22,7 @@
         "importHelpers": false,
         // "watch": false
         "incremental": true,
-        "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
+        "tsBuildInfoFile": "./node_modules/.tsbuildinfo.json",
         
         
         // --- emit
