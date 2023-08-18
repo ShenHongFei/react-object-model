@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+
 /** 面向对象的 react 状态管理  Object-oriented state management for react.  
     @see https://github.com/ShenHongFei/react-object-model
     @example ```ts
