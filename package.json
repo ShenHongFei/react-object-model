@@ -1,7 +1,7 @@
 {
     "name": "react-object-model",
     "description": "Object-oriented state management for react.",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "type": "module",
     "main": "./index.js",
     "scripts": {
@@ -28,6 +28,6 @@
     },
     "devDependencies": {
         "@types/react": "^18.2.21",
-        "typescript": "^5.1.6"
+        "typescript": "^5.2.2"
     }
 }
