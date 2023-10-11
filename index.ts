@@ -47,8 +47,13 @@ export class Model <TModel> {
         // React guarantees that dispatch function identity is stable and won’t change on re-renders
         const [, rerender] = useState({ })
         
+        // 需要在 render 阶段就将组件加到订阅中，因为 effects 之间的执行顺序很难规划，react 只保证 render 过程在 effect 之前
+        // 一般情况下子组件 effect 先执行，如果此时子组件 effect 中改变了父组件通过 use 订阅的状态，
+        // 而订阅关系又不在 render 阶段设置，那么通过 use 订阅的状态的父组件还未执行下面的 effect 建立订阅关系，会漏掉这次更新
+        this._selectors.set(rerender, selector)
+        
         useEffect(() => {
-            // 需要在 useEffect 里将组件加到订阅中，因为
+            // 需要在 useEffect 里再次将组件加到订阅中，因为
             // strict mode 的 Ensuring reusable state 在 remount 组件时只会重新执行所有 effect, 不会再执行 render
             this._selectors.set(rerender, selector)
             return () => { this._selectors.delete(rerender) }
