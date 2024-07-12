@@ -10,7 +10,7 @@ export function use_rerender () {
 }
 
 
-export function use_modal () {
+export function use_modal (): ModalController {
     const [visible, set_visible] = useState(false)
     
     return {
@@ -24,4 +24,11 @@ export function use_modal () {
             set_visible(false)
         }
     }
+}
+
+
+export interface ModalController {
+    visible: boolean
+    open(): void
+    close(): void
 }
