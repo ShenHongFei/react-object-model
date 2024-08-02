@@ -74,6 +74,8 @@ export class Model <TModel> {
     }
     
     
+    /** - 未传 diffs 时，根据当前 model 状态与上一次状态 diff 计算出变化属性，重新渲染订阅了变化属性的组件
+        - 手动传入 diffs 时，重新渲染订阅了其中属性的组件 */
     render (diffs?: (keyof TModel)[]) {
         const set_diffs = diffs ? new Set(diffs) : null
         
