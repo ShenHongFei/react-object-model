@@ -37,7 +37,7 @@ export interface ModalController {
 /** 类似 useState, 同时将 state 绑定到 ref 从而方便的获取其最新的值, 返回 [state, ref, set_state] */
 export function use_ref_state <TState> (initial_state?: TState | (() => TState)): [
     TState,
-    MutableRefObject<TState | (() => TState)>,
+    MutableRefObject<TState>,
     Dispatch<SetStateAction<TState>>
 ] {
     let [state, _set_state] = useState(initial_state)
