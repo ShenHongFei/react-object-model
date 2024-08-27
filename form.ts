@@ -14,7 +14,7 @@ import {
 } from 'final-form'
 
 
-import { Model } from './index.js'
+import { Model } from './index.ts'
 
 
 /** 基于 final-form 的面向对象的表单模型  Object-oriented form model based on final-form.  

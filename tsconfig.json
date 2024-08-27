@@ -26,6 +26,7 @@
         
         
         // --- emit
+        "noEmit": true,
         "declaration": true,
         "emitDeclarationOnly": false,
         "noEmitOnError": false,
@@ -42,6 +43,7 @@
         "removeComments": false,
         "preserveConstEnums": true,
         "forceConsistentCasingInFileNames": true,
+        "allowImportingTsExtensions": true,
         
         
         // --- type checking
