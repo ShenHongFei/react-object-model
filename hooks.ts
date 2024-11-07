@@ -1,4 +1,4 @@
-import { useRef, useState, type Dispatch, type MutableRefObject, type SetStateAction } from 'react'
+import { useEffect, useRef, useState, type Dispatch, type MutableRefObject, type SetStateAction } from 'react'
 
 
 export function use_rerender () {
@@ -43,4 +43,18 @@ export function use_ref_state <TState> (initial_state?: TState | (() => TState))
     let [state, _set_state] = useState(initial_state)
     let ref = useRef(state)
     return [state, ref, (value: TState) => { _set_state(ref.current = value) }]
+}
+
+
+/** 根据 html element 渲染的高度更新 height state */
+export function use_height <TElement extends HTMLElement = HTMLElement> (initial_height: number) {
+    let [height, set_height] = useState(initial_height)
+    let ref = useRef<TElement>()
+    
+    useEffect(() => {
+        if (ref.current)
+            set_height(ref.current.clientHeight)
+    }, [ref.current])
+    
+    return [height, ref]
 }
