@@ -47,7 +47,9 @@ export function use_ref_state <TState> (initial_state?: TState | (() => TState))
 
 
 /** 根据 html element 渲染的高度更新 height state */
-export function use_height <TElement extends HTMLElement = HTMLElement> (initial_height: number) {
+export function use_height <TElement extends HTMLElement = HTMLElement> (initial_height: number): [
+    number, MutableRefObject<TElement>
+] {
     let [height, set_height] = useState(initial_height)
     let ref = useRef<TElement>()
     
