@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type Dispatch, type MutableRefObject, type SetStateAction } from 'react'
+import { useEffect, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from 'react'
 
 
 export function use_rerender () {
@@ -37,7 +37,7 @@ export interface ModalController {
 /** 类似 useState, 同时将 state 绑定到 ref 从而方便的获取其最新的值, 返回 [state, ref, set_state] */
 export function use_ref_state <TState> (initial_state?: TState | (() => TState)): [
     TState,
-    MutableRefObject<TState>,
+    RefObject<TState>,
     Dispatch<SetStateAction<TState>>
 ] {
     let [state, _set_state] = useState(initial_state)
@@ -48,10 +48,10 @@ export function use_ref_state <TState> (initial_state?: TState | (() => TState))
 
 /** 根据 html element 渲染的高度更新 height state */
 export function use_height <TElement extends HTMLElement = HTMLElement> (initial_height: number): [
-    number, MutableRefObject<TElement>
+    number, RefObject<TElement>
 ] {
     let [height, set_height] = useState(initial_height)
-    let ref = useRef<TElement>()
+    let ref = useRef<TElement>(undefined)
     
     useEffect(() => {
         if (ref.current)
