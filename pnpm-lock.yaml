@@ -11,17 +11,17 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.0.0
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.2
+        version: 19.0.2
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
     optionalDependencies:
       final-form:
         specifier: ^4.20.10
         version: 4.20.10
-    devDependencies:
-      '@types/react':
-        specifier: ^19.0.1
-        version: 19.0.1
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
 
 packages:
 
@@ -29,8 +29,8 @@ packages:
     resolution: {integrity: sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==}
     engines: {node: '>=6.9.0'}
 
-  '@types/react@19.0.1':
-    resolution: {integrity: sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==}
+  '@types/react@19.0.2':
+    resolution: {integrity: sha512-USU8ZI/xyKJwFTpjSVIrSeHBVAGagkHQKPNbxeWwql/vDmnTIBgx+TJnhFnj1NXgz8XfprU0egV2dROLGpsBEg==}
 
   csstype@3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
@@ -58,7 +58,7 @@ snapshots:
       regenerator-runtime: 0.13.11
     optional: true
 
-  '@types/react@19.0.1':
+  '@types/react@19.0.2':
     dependencies:
       csstype: 3.1.1
 
