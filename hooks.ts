@@ -60,3 +60,14 @@ export function use_height <TElement extends HTMLElement = HTMLElement> (initial
     
     return [height, ref]
 }
+
+
+export function use_keydown (
+    on_keydown: (event: KeyboardEvent) => void,
+    target: EventTarget = window
+) {
+    useEffect(() => {
+        target.addEventListener('keydown', on_keydown)
+        return () => { target.removeEventListener('keydown', on_keydown) }
+    }, [ ])
+}
