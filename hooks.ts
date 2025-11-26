@@ -71,3 +71,13 @@ export function use_keydown (
         return () => { target.removeEventListener('keydown', on_keydown) }
     }, [ ])
 }
+
+
+export function use_before_unload (
+    on_before_unload: (event: BeforeUnloadEvent) => void
+) {
+    useEffect(() => {
+        window.addEventListener('beforeunload', on_before_unload)
+        return () => { window.removeEventListener('beforeunload', on_before_unload) }
+    }, [ ])
+}
