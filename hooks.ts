@@ -1,4 +1,7 @@
-import { useEffect, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from 'react'
+import {
+    useCallback, useEffect, useRef, useState, 
+    type Dispatch, type RefObject, type SetStateAction
+} from 'react'
 
 
 export function use_rerender () {
@@ -80,4 +83,33 @@ export function use_before_unload (
         window.addEventListener('beforeunload', on_before_unload)
         return () => { window.removeEventListener('beforeunload', on_before_unload) }
     }, [ ])
+}
+
+
+export interface Size {
+    width: number
+    height: number
+}
+
+export function use_size <TElement extends HTMLElement = HTMLDivElement> (
+    ref: RefObject<TElement>
+): Size | undefined {
+    let [size, set_size] = useState<Size | undefined>(undefined)
+    
+    const on_resize = useCallback((entries: ResizeObserverEntry[]) => {
+        const { width, height } = entries[0].contentRect
+        set_size({ width, height })
+    }, [ ])
+    
+    useEffect(() => {
+        let observer = new ResizeObserver(on_resize)
+        
+        observer.observe(ref.current)
+        
+        return () => {
+            observer.disconnect()
+        }
+    }, [ref, on_resize])
+    
+    return size
 }
