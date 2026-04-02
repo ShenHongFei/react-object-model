@@ -5,15 +5,14 @@
     
     "compilerOptions": {
         // --- module
-        "module": "ESNext", // none, CommonJS, amd, system, umd, es6, es2015, ESNext
-        "moduleResolution": "Bundler",
+        "module": "esnext",
+        "moduleResolution": "bundler",
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
         
         // --- build
-        "target": "ESNext",
+        "target": "esnext",
         "allowJs": false,
         "checkJs": false,
         "pretty": true,
@@ -49,7 +48,6 @@
         
         // --- type checking
         "strict": false,
-        "alwaysStrict": false,
         "noImplicitAny": false,
         "noImplicitReturns": false,
         "noImplicitThis": true,
