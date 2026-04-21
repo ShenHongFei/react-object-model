@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       react:
-        specifier: ^19.0.0
-        version: 19.0.0
+        specifier: ^19.2.5
+        version: 19.2.5
     devDependencies:
       '@types/react':
         specifier: ^19.2.14
@@ -39,8 +39,8 @@ packages:
     resolution: {integrity: sha512-HByosvP7x3N4bWTCPoBeUeoMatadewRifxaH3qhCQI2DBwFNO0m5wxETLVUXNGWz2yokdSCMdJEvtjfZoXnqDA==}
     engines: {node: '>=8'}
 
-  react@19.0.0:
-    resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
+  react@19.2.5:
+    resolution: {integrity: sha512-llUJLzz1zTUBrskt2pwZgLq59AemifIftw4aB7JxOqf1HY2FDaGDxgwpAPVzHU1kdWabH7FauP4i1oEeer2WCA==}
     engines: {node: '>=0.10.0'}
 
   regenerator-runtime@0.13.11:
@@ -69,7 +69,7 @@ snapshots:
       '@babel/runtime': 7.20.13
     optional: true
 
-  react@19.0.0: {}
+  react@19.2.5: {}
 
   regenerator-runtime@0.13.11:
     optional: true
