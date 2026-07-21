@@ -11,5 +11,7 @@ node_modules/
 /desktop.ini
 /rom.svg
 /rom.ico
+/rom.png
 /tsconfig.json
 /package-lock.json
+/pnpm-lock.yaml

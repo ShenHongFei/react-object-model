@@ -33,9 +33,9 @@
         "rewriteRelativeImportExtensions": true,
         
         // --- source maps
-        "sourceMap": true,
+        "sourceMap": false,
         "inlineSourceMap": false,
-        "inlineSources": true,
+        "inlineSources": false,
         
         // --- features
         "preserveSymlinks": false,

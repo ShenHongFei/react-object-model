@@ -20,14 +20,10 @@
         "state management",
         "object-oriented"
     ],
-    "optionalDependencies": {
-        "final-form": "^5.0.0"
-    },
     "peerDependencies": {
-        "react": "^19.2.5"
+        "react": "^19.2.7"
     },
     "devDependencies": {
-        "@types/react": "^19.2.14",
-        "typescript": "^6.0.3"
+        "@types/react": "^19.2.17"
     }
 }
